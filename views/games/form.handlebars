@@ -1,0 +1,136 @@
+<div class="form-container">
+  <h1>{{#if game}}Edit{{else}}New{{/if}} Game</h1>
+  <form class="games-form" action="/games/upsert" role="form" method="post">
+    <div class="form-image-container">
+      <input type="hidden" name="_csrf" value="{{_csrfToken}}">
+      {{#if game}}
+        <div class="image-body">
+          <h2 style="margin: 5px auto;">{{game.title}}</h2>
+          <input type="hidden" name="id" value="{{game.id}}">
+          <img src={{game.imageUrl}} alt="" style="width: 100%;height:100%;min-height:400px;object-fit:cover;">
+        </div>
+      {{/if}}
+    </div>
+    <div class="form-inputs">
+      <div class="flex-1">
+        <div class="input-container">
+          <label for="title">Title</label>
+          <input class="input" type="text" id="title" name="title" {{#if game}}value="{{game.title}}"{{/if}}>
+        </div>
+        <div class="input-container">
+          <label for="studio">Studio</label>
+          <input class="input" type="text" id="studio" name="studio" {{#if game}}value="{{game.studio}}"{{/if}}>
+          {{!-- <select class="input" id="studio" name="studio">
+            <option value="">-- Select Studio --</option>  {{#each studios}}
+              <option value="{{this.id}}" {{#if this.id game.studio}}selected{{/if}}>{{this.name}}</option>
+            {{/each}}
+          </select> --}}
+        </div>
+        <div class="input-container">
+          <label for="release_date">Release Date</label>
+          <input class="input" type="text" id="release_date" name="releaseDate" {{#if game}} value="{{game.releaseDate}}"{{/if}}>
+        </div>
+        <div class="input-container">
+          <label for="description">Description</label>
+          <textarea class="input" id="description" rows="5" name="description">{{#if game}}{{game.description}}{{/if}}</textarea>
+        </div>
+      </div>
+      <div class="flex-1">
+        <div class="input-container">
+          <label for="image_url">Image URL</label>
+          <input class="input" type="text" id="image_url" name="imageUrl" {{#if game}}value="{{game.imageUrl}}"{{/if}}>
+        </div>
+        <div class="input-container">
+          <label for="status">Status</label>
+          <select class="input" id="status" name="status">
+            <option value="started" {{#if game.status}}selected{{/if}}>Started</option>
+            <option value="not started" {{#if game.status}}selected{{/if}}>Not Started</option>
+            <option value="finished" {{#if game.status}}selected{{/if}}>Finished</option>
+          </select>
+        </div>
+        <div class="input-container">
+          {{#if comment}}
+            <ul>
+              <h3>Comments</h3>
+              {{#each comments}}
+                <li>{{this.commentText}} - {{this.commentDate}}</li>
+              {{/each}}
+            </ul>
+          {{/if}}
+          <label for="comment">Add Comment</label>
+          <textarea class="input" id="comment" rows="3" name="comment"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+
+{{!-- <div class="form-container">
+<h1>New Game</h1>
+<form class="games-form" action="/games/upsert" role="form" method="post">
+<div class="form-image-container">
+  <input type="hidden" name="_csrf" value="{{_csrfToken}}">
+  {{#if game}}
+    <div class="image-body">
+      <h2 style="margin: 5px auto;">{{game.title}}</h2>
+      <input type="hidden" name="id" value="{{game.id}}">
+      <img src={{game.imageUrl}} alt="" style="width: 100%;height:100%;min-height:400px;object-fit:cover;">
+    </div>
+  {{/if}}
+</div>
+<div class="form-inputs">
+  <div class="flex-1">
+  <div class="input-container">
+    <label for="title">Title</label>
+    <input class="input" type="text" id="title" name="title" {{#if game}}value="{{game.title}}"{{/if}}>
+  </div>
+<div class="input-container">
+  <label for="studio">Studio</label>
+  <select class="input" id="studio" name="studio">
+    {{#each studios}}
+      <option value="{{this.id}}" {{#if this.id game.studio}}selected{{/if}}>{{this.name}}</option>
+    {{/each}}
+  </select>
+</div>
+
+
+  <div class="input-container">
+    <label for="release_date">Release Date</label>
+    <input class="input" type="text" id="release_date" name="releaseDate" {{#if game}} value="{{game.releaseDate}}"{{/if}}>
+  </div>
+  <div class="input-container">
+    <label for="description">Description</label>
+    <textarea class="input" id="description" rows="5" name="description">{{#if game}}{{game.description}}{{/if}}</textarea>
+  </div>
+  </div>
+  <div class="flex-1">
+  <div class="input-container">
+    <label for="image_url">Image URL</label>
+    <input class="input" type="text" id="image_url" name="imageUrl" {{#if game}}value="{{game.imageUrl}}"{{/if}}>
+  </div>
+  <div class="input-container">
+    <label for="status">Status</label>
+    <select class="input" id="status" name="status">
+      <option value="started" {{#if game.status}}selected{{/if}}>Started</option>
+      <option value="not started" {{#if game.status}}selected{{/if}}>Not Started</option>
+      <option value="finished" {{#if game.status}}selected{{/if}}>Finished</option>
+    </select>
+  </div>
+<div class="input-container">
+{{#if comments}}
+    <ul>
+        {{#each comments}}
+            <li>{{this.commentText}} - {{this.commentDate}}</li>
+        {{/each}}
+    </ul>
+{{/if}}
+<textarea class="input" id="comment" rows="5" name="comment"></textarea>
+</div>
+
+  <button type="submit" class="btn btn-primary">Submit</button>
+  </div>
+</div>
+</form>
+</div> --}}

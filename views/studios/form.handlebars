@@ -1,0 +1,105 @@
+<div class="form-container">
+  <h1>{{#if studio}}Edit{{else}}New{{/if}} Studio</h1>
+  <form class="games-form" action="/studios/upsert" role="form" method="post">
+    <div class="form-image-container">
+      <input type="hidden" name="_csrf" value="{{_csrfToken}}">
+      {{#if studio}}
+        <div class="image-body">
+          <h2 style="margin: 5px auto;">{{studio.name}}</h2>
+          <input type="hidden" name="id" value="{{studio.id}}">
+          <img src={{studio.imageUrl}} alt="" style="width: 100%;height:100%;min-height:400px;object-fit:cover;">
+        </div>
+      {{/if}}
+    </div>
+    <div class="form-inputs">
+      <div class="flex-1">
+        <div class="input-container">
+          <label for="title">Title</label>
+          <input class="input" type="text" id="name" name="name" {{#if studio}}value="{{studio.name}}"{{/if}}>
+        </div>
+        <div class="input-container">
+          <label for="description">Description</label>
+          <textarea class="input" id="description" rows="5" name="description">{{#if studio}}{{studio.description}}{{/if}}</textarea>
+        </div>
+        <div class="input-container">
+          <label for="games">Games</label>
+          <div class="games-input">
+           {{#each games}}
+          <li>{{this.title}}</li>
+          {{/each}}
+        </div>
+        </div>
+      </div>
+      <div class="flex-1">
+        <div class="input-container">
+          <label for="status">Status</label>
+          <select class="input" id="status" name="status">
+            <option value="started" {{#if studio.status}}selected{{/if}}>Started</option>
+            <option value="not started" {{#if studio.status}}selected{{/if}}>Not Started</option>
+            <option value="finished" {{#if studio.status}}selected{{/if}}>Finished</option>
+          </select>
+        </div>
+        <div class="input-container">
+          <label for="image_url">Image URL</label>
+          <input class="input" type="text" id="image_url" name="imageUrl" {{#if studio}}value="{{studio.imageUrl}}"{{/if}}>
+        </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+
+{{!-- <div class="form-container">
+  <h1>New Studio</h1>
+  <form class="games-form" action="/studios/upsert" role="form" method="post">
+    <div class="form-image-container">
+      <input type="hidden" name="_csrf" value="{{_csrfToken}}">
+      {{#if studio}}
+        <div class="image-body">
+          <h2 style="margin: 5px auto;">{{studio.name}}</h2>
+          <input type="hidden" name="studioId" value="{{studio.id}}">
+          <img src={{studio.imageUrl}} alt="" style="width: 100%;height:100%;min-height:400px;object-fit:cover;">
+        </div>
+      {{/if}}
+    </div>
+    <div class="form-inputs">
+      <div class="flex-1">
+        <div class="input-container">
+          <label for="title">Title</label>
+          <input class="input" type="text" id="name" name="name" {{#if studio}}value="{{studio.name}}"{{/if}}>
+
+        </div>
+        <div class="input-container">
+          <label for="description">Description</label>
+          <textarea class="input" id="description" rows="5" name="description">{{#if studio}}{{studio.description}}{{/if}}</textarea>
+        </div>
+      <div class="input-container">
+          <label for="games">Games</label>
+          <div class="games-input">
+           {{#each games}}
+          <li>{{this.title}}</li>
+          {{/each}}
+
+        </div>
+      </div>
+
+      </div>
+      <div class="flex-1">
+        <div class="input-container">
+          <label for="image_url">Image URL</label>
+          <input class="input" type="text" id="image_url" name="imageUrl" {{#if studio}}value="{{studio.imageUrl}}"{{/if}}>
+        </div>
+        <div class="input-container">
+          <label for="status">Status</label>
+          <select class="input" id="status" name="status">
+            <option value="started" {{#if studio.status}}selected{{/if}}>Started</option>
+            <option value="not started" {{#if studio.status}}selected{{/if}}>Not Started</option>
+            <option value="finished" {{#if studio.status}}selected{{/if}}>Finished</option>
+          </select>
+        </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </div>
+  </form>
+</div> --}}
